@@ -1,5 +1,7 @@
 package com.mood;
 
+import com.mood.com.mood.MoodAnalyzerException;
+
 public class MoodAnalyzer {
     private String message;
 
@@ -11,7 +13,15 @@ public class MoodAnalyzer {
     }
 
     public String analyseMood(String message) {
-        this.message = message;
+        try {
+            this.message = message;
+            if (message == null || message.isEmpty()) {
+                throw new MoodAnalyzerException();
+            }
+
+        } catch (MoodAnalyzerException e) {
+            return "happy";
+        }
         return analyseMood();
     }
 
